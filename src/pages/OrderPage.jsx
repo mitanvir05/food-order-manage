@@ -18,6 +18,8 @@ const OrderPage = () => {
   const [quantities, setQuantities] = useState({});
   const [customerName, setCustomerName] = useState("");
   const [orders, setOrders] = useState([]);
+  const [filter, setFilter] = useState("All");
+
   const handlePlus = (id) => {
     setQuantities((prev) => ({
       ...prev,
@@ -72,6 +74,23 @@ const OrderPage = () => {
     setQuantities({});
   };
 
+  const handleDelete = (id) => {
+    setOrders((prev) => prev.filter((order) => order.id !== id));
+  };
+
+  const handleDeliver = (id) => {
+    setOrders((prev) =>
+      prev.map((order) =>
+        order.id === id ? { ...order, status: "DELIVERED" } : order
+      )
+    );
+  };
+
+   const filteredOrders = orders.filter((order) => {
+    if (filter === "All") return true;
+    return order.status === filter.toUpperCase();
+  });
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 flex-grow">
       <CreateOrder
@@ -85,8 +104,14 @@ const OrderPage = () => {
         handlePlaceOrder={handlePlaceOrder}
       />
       <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
-        <OrderSummary />
-        <OrderReports  orders={orders}/>
+        <OrderSummary orders={orders}/>
+        <OrderReports
+          orders={filteredOrders}
+          onDelete={handleDelete}
+          onDeliver={handleDeliver}
+          filter={filter}
+          setFilter={setFilter}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import FunnelIcon from "../icons/FunnelIcon";
 import DropdownIcon from "../icons/DropdownIcon";
 
-const OrderReports = ({ orders }) => {
+const OrderReports = ({ orders, onDelete, onDeliver, filter, setFilter }) => {
   return (
     <div>
       <div className="flex justify-between">
@@ -12,7 +12,10 @@ const OrderReports = ({ orders }) => {
           <FunnelIcon />
 
           <div className="relative">
-            <select className="bg-zinc-900 text-white pr-8 pl-2 py-1 rounded appearance-none">
+            <select
+              onChange={(e) => setFilter(e.target.value)}
+              className="bg-zinc-900 text-white pr-8 pl-2 py-1 rounded appearance-none"
+            >
               <option>All</option>
               <option>Pending</option>
               <option>Delivered</option>
@@ -48,12 +51,20 @@ const OrderReports = ({ orders }) => {
                     <span className="text-red-500">{order.status}</span>
                   </td>
                   <td className="py-3">
-                    <button className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
+                    <button
+                      onClick={() => onDelete(order.id)}
+                      className="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300"
+                    >
                       Delete
                     </button>
-                    <button className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                      DELIVER
-                    </button>
+                    {order.status === "PENDING" && (
+                      <button
+                        onClick={() => onDeliver(order.id)}
+                        className="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300"
+                      >
+                        DELIVER
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
