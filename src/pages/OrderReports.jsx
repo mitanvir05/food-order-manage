@@ -21,7 +21,7 @@ const OrderReports = ({ orders, onDelete, onDeliver, setFilter }) => {
               <option>Delivered</option>
             </select>
             <div className="pointer-events-none absolute top-2.5 right-2">
-              <DropdownIcon />
+              <DropdownIcon/>
             </div>
           </div>
         </div>
