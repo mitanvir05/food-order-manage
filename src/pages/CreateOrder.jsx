@@ -10,13 +10,14 @@ const CreateOrder = ({
   handlePlus,
   handleMinus,
   totalPrice,
-  handlePlaceOrder
+  handlePlaceOrder,
 }) => {
   return (
     <div className="bg-cardbg rounded-lg p-6 h-[calc(100vh_-_130px)] flex flex-col">
       <h2 className="text-xl font-bold mb-1">CREATE ORDER</h2>
       <p className="text-gray-400 text-sm mb-4">
-        Accurately fulfill customer orders based on a precise understanding of their requirements.
+        Accurately fulfill customer orders based on a precise understanding of
+        their requirements.
       </p>
 
       {/* Customer Name Input */}
@@ -52,20 +53,20 @@ const CreateOrder = ({
 
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={() => handlePlus(item.id)}
-                  className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300 cursor-pointer"
-                >
-                  <PlusIcons />
-                </button>
-
-                <span className="text-white font-semibold w-6 text-center">{qty}</span>
-
-                <button
                   onClick={() => handleMinus(item.id)}
                   className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300 cursor-pointer"
                   disabled={qty === 0}
                 >
                   <MinusIcons />
+                </button>
+                <span className="text-white font-semibold w-6 text-center">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => handlePlus(item.id)}
+                  className="w-8 h-8 bg-gray-800 hover:bg-primary rounded-full flex items-center justify-center transition-colors duration-300 cursor-pointer"
+                >
+                  <PlusIcons />
                 </button>
               </div>
             </div>
@@ -74,7 +75,8 @@ const CreateOrder = ({
       </div>
 
       {/* Place Order Button */}
-      <button  onClick={handlePlaceOrder}
+      <button
+        onClick={handlePlaceOrder}
         className="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 rounded-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 cursor-pointer"
         disabled={totalPrice === 0}
       >
