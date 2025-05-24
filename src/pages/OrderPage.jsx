@@ -17,7 +17,7 @@ const foodItemsInitial = [
 const OrderPage = () => {
   const [quantities, setQuantities] = useState({});
   const [customerName, setCustomerName] = useState("");
-
+  const [orders, setOrders] = useState([]);
   const handlePlus = (id) => {
     setQuantities((prev) => ({
       ...prev,
@@ -42,6 +42,36 @@ const OrderPage = () => {
     return total + item.price * qty;
   }, 0);
 
+  const handlePlaceOrder = () => {
+    if (!customerName.trim()) {
+      alert("Customer name is required!");
+      return;
+    }
+    if (Object.keys(quantities).length === 0) {
+      alert("Please add at least one item.");
+      return;
+    }
+
+    const items = foodItemsInitial
+      .map((item) => ({
+        ...item,
+        qty: quantities[item.id] || 0,
+      }))
+      .filter((item) => item.qty > 0);
+
+    const newOrder = {
+      id: crypto.randomUUID(),
+      customerName,
+      items,
+      amount: totalPrice,
+      status: "PENDING",
+    };
+
+    setOrders((prev) => [...prev, newOrder]);
+    setCustomerName("");
+    setQuantities({});
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 flex-grow">
       <CreateOrder
@@ -52,10 +82,11 @@ const OrderPage = () => {
         handlePlus={handlePlus}
         handleMinus={handleMinus}
         totalPrice={totalPrice}
+        handlePlaceOrder={handlePlaceOrder}
       />
       <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
         <OrderSummary />
-        <OrderReports/>
+        <OrderReports  orders={orders}/>
       </div>
     </div>
   );

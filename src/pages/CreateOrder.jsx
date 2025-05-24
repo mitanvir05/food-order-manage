@@ -10,6 +10,7 @@ const CreateOrder = ({
   handlePlus,
   handleMinus,
   totalPrice,
+  handlePlaceOrder
 }) => {
   return (
     <div className="bg-cardbg rounded-lg p-6 h-[calc(100vh_-_130px)] flex flex-col">
@@ -25,7 +26,7 @@ const CreateOrder = ({
           type="text"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
-          className="w-full bg-gray-700 bg-opacity-50 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+          className="w-full bg-gray-800 bg-opacity-50 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
         />
       </div>
 
@@ -37,7 +38,7 @@ const CreateOrder = ({
           return (
             <div
               key={item.id}
-              className="bg-gray-700 bg-opacity-30 rounded-md p-3 mb-3 flex justify-between items-center hover:bg-opacity-40 transition-all duration-300"
+              className="bg-gray-800 bg-opacity-30 rounded-md p-3 mb-3 flex justify-between items-center hover:bg-opacity-40 transition-all duration-300"
             >
               <div className="flex items-center">
                 <div className="w-12 h-12 flex items-center justify-center mr-3">
@@ -73,7 +74,7 @@ const CreateOrder = ({
       </div>
 
       {/* Place Order Button */}
-      <button
+      <button  onClick={handlePlaceOrder}
         className="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 rounded-full transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 cursor-pointer"
         disabled={totalPrice === 0}
       >
