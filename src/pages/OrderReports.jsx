@@ -2,7 +2,7 @@ import React from "react";
 import FunnelIcon from "../icons/FunnelIcon";
 import DropdownIcon from "../icons/DropdownIcon";
 
-const OrderReports = ({ orders, onDelete, onDeliver, filter, setFilter }) => {
+const OrderReports = ({ orders, onDelete, onDeliver, setFilter }) => {
   return (
     <div>
       <div className="flex justify-between">
@@ -48,7 +48,15 @@ const OrderReports = ({ orders, onDelete, onDeliver, filter, setFilter }) => {
 
                   <td className="py-3">{order.amount}</td>
                   <td className="py-3">
-                    <span className="text-red-500">{order.status}</span>
+                    <span
+                      className={
+                        order.status === "DELIVERED"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }
+                    >
+                      {order.status}
+                    </span>
                   </td>
                   <td className="py-3">
                     <button

@@ -69,7 +69,7 @@ const OrderPage = () => {
       status: "PENDING",
     };
 
-    setOrders((prev) => [...prev, newOrder]);
+    setOrders((prev) => [newOrder, ...prev]);
     setCustomerName("");
     setQuantities({});
   };
