@@ -4,6 +4,8 @@ import hamburger from "../assets/hamburger.svg";
 import chicken from "../assets/chicken.svg";
 import submarine from "../assets/submarine.svg";
 import pizza from "../assets/pizza.svg";
+import OrderSummary from "./OrderSummary";
+import OrderReports from "./OrderReports";
 
 const foodItemsInitial = [
   { id: 1, name: "Hamburger", price: 300, img: hamburger },
@@ -51,6 +53,10 @@ const OrderPage = () => {
         handleMinus={handleMinus}
         totalPrice={totalPrice}
       />
+      <div className="md:col-span-2 h-[calc(100vh_-_130px)]">
+        <OrderSummary />
+        <OrderReports/>
+      </div>
     </div>
   );
 };
